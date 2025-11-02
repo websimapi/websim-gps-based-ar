@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>GPS-Based AR</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="margin: 0; overflow: hidden;">
+
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Waiting for GPS signal...</p>
+        <p>Please make sure you are outdoors with a clear view of the sky and have enabled location services.</p>
+    </div>
+
+    <a-scene 
+        vr-mode-ui="enabled: false" 
+        embedded 
+        arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
+
+        <a-text 
+            value="Golden Gate Bridge" 
+            look-at="[gps-camera]" 
+            scale="100 100 100" 
+            gps-entity-place="latitude: 37.8199; longitude: -122.4783;">
+        </a-text>
+
+        <a-box 
+            material="color: red" 
+            scale="20 20 20"
+            look-at="[gps-camera]"
+            position="0 30 0"
+            gps-entity-place="latitude: 37.8210; longitude: -122.4785;">
+        </a-box>
+
+        <a-camera 
+            id="camera"
+            look-controls-enabled='false'
+            arjs-device-orientation-controls='smoothingFactor: 0.1'
+            gps-camera='gpsMinDistance: 5'>
+        </a-camera>
+    </a-scene>
+
+    <script src="main.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
